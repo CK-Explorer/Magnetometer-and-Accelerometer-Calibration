@@ -53,4 +53,4 @@ All the mathematical details involved in this algorithm are available in this [p
 
 ## :warning: License
 
-This project is licensed under the Apache-2.0 license - see the [LICENSE.md](LICENSE.md) file for details.
+This project is licensed under the Apache-2.0 license - see the [LICENSE](LICENSE) file for details.
