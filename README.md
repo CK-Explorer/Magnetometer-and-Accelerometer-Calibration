@@ -38,7 +38,7 @@ All the mathematical details involved in this algorithm are available in this [p
 ### :test_tube: Examples
 
 * Demo for calibrating accelerometer or magnetometer when it is used solely,
-    * first include [acc_log.csv](Data%20Examples/acc_log.csv).as data file.
+    * first include [acc_log.csv](Data%20Examples/acc_log.csv) as data file.
     * [Accelerometer Calibration Example.cpp](Calibration%20C%2B%2B%20Library/Examples/Accelerometer%20Calibration%20Example.cpp) for C++.
     * [calibration_acc_interface.m](Calibration%20MATLAB%20script/Examples/calibration_acc_interface.m) for MATLAB.
 * Demo for calibrating magnetometer with well-calibrated accelerometer,
