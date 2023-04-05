@@ -73,19 +73,20 @@ void Calibration::non_orthogonality(
     const Eigen::MatrixXd& points,
     alglib::real_2d_array& n_o, double centre[3])
 {
+    Eigen::Matrix<double, 10, 1> algebraicForm;
     auto parameters = ellipsoid::fit(points, 
-        ellipsoid::EllipsoidType::Arbitrary);
+        [&](const Eigen::Matrix<double, 10, 1>& v) { algebraicForm = v; });
 
     Eigen::Matrix3d k_matrix;
     k_matrix << 
-        parameters.v(0), parameters.v(3), parameters.v(4),
-        parameters.v(3), parameters.v(1), parameters.v(5),
-        parameters.v(4), parameters.v(5), parameters.v(2);
+        algebraicForm(0), algebraicForm(3), algebraicForm(4),
+        algebraicForm(3), algebraicForm(1), algebraicForm(5),
+        algebraicForm(4), algebraicForm(5), algebraicForm(2);
 
     double value = parameters.center.transpose() * k_matrix * parameters.center
-        - parameters.v(9);
+        - algebraicForm(9);
     
-    parameters.v = parameters.v / value;
+    algebraicForm = algebraicForm / value;
 
     for (int i = 0; i < 3; i++)
     {
@@ -94,12 +95,12 @@ void Calibration::non_orthogonality(
 
     n_o = "[[0, 0, 0],[0, 0, 0],[0, 0, 0]]";
 
-    n_o[2][2] = sqrt(parameters.v(2));
-    n_o[2][1] = parameters.v(5) / n_o[2][2];
-    n_o[2][0] = parameters.v(4) / n_o[2][2];
-    n_o[1][1] = sqrt(parameters.v(1) - n_o[2][1] * n_o[2][1]);
-    n_o[1][0] = (parameters.v(3) - n_o[2][1] * n_o[2][0]) / n_o[1][1];
-    n_o[0][0] = sqrt(parameters.v(0) - n_o[1][0] * n_o[1][0] - n_o[2][0] * n_o[2][0]);
+    n_o[2][2] = sqrt(algebraicForm(2));
+    n_o[2][1] = algebraicForm(5) / n_o[2][2];
+    n_o[2][0] = algebraicForm(4) / n_o[2][2];
+    n_o[1][1] = sqrt(algebraicForm(1) - n_o[2][1] * n_o[2][1]);
+    n_o[1][0] = (algebraicForm(3) - n_o[2][1] * n_o[2][0]) / n_o[1][1];
+    n_o[0][0] = sqrt(algebraicForm(0) - n_o[1][0] * n_o[1][0] - n_o[2][0] * n_o[2][0]);
 }
 
 alglib::real_1d_array Calibration::misalignment_correction(
