@@ -74,8 +74,7 @@ void Calibration::non_orthogonality(
     alglib::real_2d_array& n_o, double centre[3])
 {
     Eigen::Matrix<double, 10, 1> algebraicForm;
-    auto parameters = ellipsoid::fit(points, 
-        [&](const Eigen::Matrix<double, 10, 1>& v) { algebraicForm = v; });
+    auto parameters = ellipsoid::fit(points, &algebraicForm);
 
     Eigen::Matrix3d k_matrix;
     k_matrix << 
