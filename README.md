@@ -25,7 +25,7 @@ All the mathematical details involved in this algorithm are available in this [p
 * For C++,
     * [ALGLIB](https://www.alglib.net/) math library, requires version 3.20.
     * [Eigen](https://eigen.tuxfamily.org/) math library.
-    * [ellipsoid-fit](https://github.com/CK-Explorer/ellipsoid-fit) library, forked from [BenjaminNavarro](https://github.com/BenjaminNavarro/ellipsoid-fit).
+    * [ellipsoid-fit](https://github.com/BenjaminNavarro/ellipsoid-fit) library.
 
 * For MATLAB,
     * [ellipsoid_fit_new](https://www.mathworks.com/matlabcentral/fileexchange/24693-ellipsoid-fit) function.
